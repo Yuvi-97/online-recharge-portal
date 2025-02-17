@@ -10,11 +10,11 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "RechargePlan")
-public class Rechargeplan {
+public class RechargePlan {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String planName;
     private String planDescription;
     private int planDuration;

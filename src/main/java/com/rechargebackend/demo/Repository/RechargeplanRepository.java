@@ -1,11 +1,10 @@
 package com.rechargebackend.demo.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.rechargebackend.demo.Model.Rechargeplan;
+import com.rechargebackend.demo.Model.RechargePlan;
 
-import jakarta.persistence.Entity;
-
-@Entity
-public interface RechargeplanRepository extends JpaRepository<Rechargeplan,Long>{
+@Repository
+public interface RechargePlanRepository extends JpaRepository<RechargePlan,Long>{
 }
