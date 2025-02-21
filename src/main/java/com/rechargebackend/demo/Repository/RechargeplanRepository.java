@@ -7,4 +7,5 @@ import com.rechargebackend.demo.Model.RechargePlan;
 
 @Repository
 public interface RechargePlanRepository extends JpaRepository<RechargePlan,Long>{
+    
 }

@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -30,12 +33,21 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/paginateSorting")
+    public Page<User> getUsersWithPaginateSortString(@RequestParam(defaultValue = "0") int page,
+                                                 @RequestParam(defaultValue = "5") int size,
+                                                 @RequestParam(defaultValue = "name") String sortBy,
+                                                 @RequestParam(defaultValue = "asc") String sortDir) {
+        return userService.getUserWithPaginationandSort(page, size, sortBy, sortDir);
+    }
+    
+
     @GetMapping("/paginate")
     public Page<User> getUsersWithPagination(@RequestParam(defaultValue = "0") int page,
                                              @RequestParam(defaultValue = "10") int size) {
         return userService.getUsersWithPagination(page, size);
     }
-
+    
     @PutMapping("/{id}")
     public Optional<User> updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);

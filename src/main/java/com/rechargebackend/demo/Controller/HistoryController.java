@@ -14,7 +14,7 @@ import java.util.Optional;
 public class HistoryController {
     @Autowired
     private HistoryService historyService;
-
+    
     // Create a new history record
     @PostMapping
     public ResponseEntity<History> createHistory(@RequestBody History history) {

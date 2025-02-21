@@ -8,9 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -35,6 +33,12 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
     
+    public Page<User> getUserWithPaginationandSort(int page,int size,String sortBy,String sortDir){
+        Sort sort= sortDir.equals("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable= PageRequest.of(page,size,sort);
+        return userRepository.findAll(pageable);
+    }
+
 
     public Optional<User> updateUser(Long id, User updatedUser) {
         return userRepository.findById(id).map(user -> {
@@ -49,6 +53,7 @@ public class UserService {
         }).orElse(Optional.empty()); 
     }
     
+
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
