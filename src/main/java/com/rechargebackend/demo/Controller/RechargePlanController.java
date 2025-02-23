@@ -42,6 +42,13 @@ public class RechargePlanController {
         return plan != null ? ResponseEntity.ok(plan) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/by-price-range")
+    public List<RechargePlan> getPlansByPriceRange(
+            @RequestParam double minPrice,
+            @RequestParam double maxPrice) {
+        return rechargePlanService.getPlansByPriceRange(minPrice, maxPrice);
+    }
+    
     // Delete a recharge plan by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRechargePlan(@PathVariable Long id) {

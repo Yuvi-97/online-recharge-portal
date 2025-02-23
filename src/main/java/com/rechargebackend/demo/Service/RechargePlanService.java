@@ -35,6 +35,10 @@ public class RechargePlanService {
         }).orElse(null);
     }
 
+    public List<RechargePlan> getPlansByPriceRange(double minPrice, double maxPrice) {
+        return rechargePlanRepository.findByPriceRange(minPrice, maxPrice);
+    }
+    
     public void deleteRechargePlan(Long id) {
         rechargePlanRepository.deleteById(id);
     }
