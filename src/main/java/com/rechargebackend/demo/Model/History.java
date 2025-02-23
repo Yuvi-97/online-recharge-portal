@@ -2,10 +2,6 @@ package com.rechargebackend.demo.Model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
