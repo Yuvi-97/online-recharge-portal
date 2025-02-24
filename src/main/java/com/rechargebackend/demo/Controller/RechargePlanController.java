@@ -3,11 +3,15 @@ package com.rechargebackend.demo.Controller;
 import com.rechargebackend.demo.Model.*;
 import com.rechargebackend.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/RechargePlan")
@@ -47,6 +51,15 @@ public class RechargePlanController {
             @RequestParam double minPrice,
             @RequestParam double maxPrice) {
         return rechargePlanService.getPlansByPriceRange(minPrice, maxPrice);
+    }
+    
+
+    @GetMapping("/paginateSort")
+    public List<RechargePlan> getMethodName(@RequestParam int Page,
+                                @RequestParam int size,
+                                @RequestParam String sortBy,
+                                @RequestParam String sortDir) {
+        return rechargePlanService.getAllRechargePlansPaginateSorting(Page, size, sortBy , sortDir).getContent();
     }
     
     // Delete a recharge plan by ID
