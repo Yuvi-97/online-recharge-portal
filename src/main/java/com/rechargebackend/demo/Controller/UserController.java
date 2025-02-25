@@ -43,7 +43,11 @@ public class UserController {
         return userService.getUserWithPaginationandSort(page, size, sortBy, sortDir);
     }
     
-
+    @GetMapping("/by-address")
+    public List<User> getUsersByAddress(@RequestParam String address) {
+        return userService.getUserbyAddress(address);
+    }
+    
     @GetMapping("/paginate")
     public Page<User> getUsersWithPagination(@RequestParam(defaultValue = "0") int page,
                                              @RequestParam(defaultValue = "10") int size) {
