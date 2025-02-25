@@ -3,7 +3,6 @@ package com.rechargebackend.demo.Controller;
 import com.rechargebackend.demo.Model.*;
 import com.rechargebackend.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,20 +18,18 @@ public class RechargePlanController {
     @Autowired
     private RechargePlanService rechargePlanService;
 
-    // Create a new recharge plan
     @PostMapping
     public ResponseEntity<RechargePlan> createRechargePlan(@RequestBody RechargePlan plan) {
         RechargePlan createdPlan = rechargePlanService.createRechargePlan(plan);
         return ResponseEntity.status(201).body(createdPlan);
     }
 
-    // Retrieve all recharge plans
+  
     @GetMapping
     public ResponseEntity<List<RechargePlan>> getAllRechargePlans() {
         return ResponseEntity.ok(rechargePlanService.getAllRechargePlans());
     }
 
-    // Retrieve a recharge plan by ID
     @GetMapping("/{id}")
     public ResponseEntity<RechargePlan> getRechargePlanById(@PathVariable Long id) {
         Optional<RechargePlan> plan = rechargePlanService.getRechargePlanById(id);

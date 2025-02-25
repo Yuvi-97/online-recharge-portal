@@ -58,7 +58,9 @@ public class UserService {
         }).orElse(Optional.empty()); 
     }
     
-
+    public Long getTotalUsers() {
+        return userRepository.totalUsers();
+    }
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);

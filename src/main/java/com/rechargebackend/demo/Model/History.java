@@ -7,6 +7,7 @@
     import jakarta.persistence.GenerationType;
     import jakarta.persistence.Id;
     import lombok.*;
+    
     @Data
     @Entity
     public class History {

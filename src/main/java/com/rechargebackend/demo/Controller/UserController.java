@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -33,6 +31,10 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/count")
+    public Long getTotalUsers() {
+        return userService.getTotalUsers();
+    }
     @GetMapping("/paginateSorting")
     public Page<User> getUsersWithPaginateSortString(@RequestParam(defaultValue = "0") int page,
                                                  @RequestParam(defaultValue = "5") int size,
