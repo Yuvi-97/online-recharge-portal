@@ -24,7 +24,6 @@ public class RechargePlanController {
         return ResponseEntity.status(201).body(createdPlan);
     }
 
-  
     @GetMapping
     public ResponseEntity<List<RechargePlan>> getAllRechargePlans() {
         return ResponseEntity.ok(rechargePlanService.getAllRechargePlans());
@@ -36,6 +35,11 @@ public class RechargePlanController {
         return plan.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/total-plans")
+    public Long getTotalPlansLong() {
+        return rechargePlanService.getTotalPlans();
+    }
+    
     // Update an existing recharge plan
     @PutMapping("/{id}")
     public ResponseEntity<RechargePlan> updateRechargePlan(@PathVariable Long id, @RequestBody RechargePlan updatedPlan) {

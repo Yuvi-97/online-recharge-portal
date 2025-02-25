@@ -44,7 +44,9 @@ public class RechargePlanService {
         Pageable pageable=PageRequest.of(page, size, sort);
         return rechargePlanRepository.findAll(pageable);
     }
-
+    public Long getTotalPlans(){
+        return rechargePlanRepository.findTotalPlans();
+    }
     public List<RechargePlan> getPlansByPriceRange(double minPrice, double maxPrice) {
         return rechargePlanRepository.findByPriceRange(minPrice, maxPrice);
     }

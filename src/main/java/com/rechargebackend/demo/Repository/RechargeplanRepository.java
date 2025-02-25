@@ -10,6 +10,10 @@ import com.rechargebackend.demo.Model.RechargePlan;
 @Repository
 public interface RechargePlanRepository extends JpaRepository<RechargePlan,Long>{
     
+
+    @Query("Select count(r) from RechargePlan r")
+    Long  findTotalPlans();
+    
     @Query("SELECT r FROM RechargePlan r WHERE r.price BETWEEN :minPrice AND :maxPrice")
     List<RechargePlan> findByPriceRange(@Param("minPrice") double minPrice, @Param("maxPrice") double maxPrice);
 }
