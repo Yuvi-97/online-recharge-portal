@@ -21,5 +21,5 @@ public interface UserRepository extends JpaRepository<User,Long>{
 
     @Query("SELECT u FROM User u WHERE u.address LIKE %:address%")
     List<User> findUsersByAddress(@Param("address") String address);
-
+    
 }

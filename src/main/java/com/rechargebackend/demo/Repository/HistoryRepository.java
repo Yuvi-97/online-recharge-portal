@@ -6,14 +6,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.rechargebackend.demo.Model.History;
+import org.springframework.lang.NonNull;
 import java.util.*;
 import java.util.Optional;
 
 
 @Repository
 public interface HistoryRepository extends JpaRepository<History,Long>{
-    Optional<History> findById(Long id);
-
+    @NonNull
+    Optional<History> findById(@NonNull Long id);
+    
     @Query("select h from History h where h.userId=:userid")
     List<History> getHistoryforUser(@Param("userid") Long userid);
 }
