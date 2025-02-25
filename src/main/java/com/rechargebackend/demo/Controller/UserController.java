@@ -47,6 +47,11 @@ public class UserController {
     public List<User> getUsersByAddress(@RequestParam String address) {
         return userService.getUserbyAddress(address);
     }
+
+    @GetMapping("/by-phone")
+    public List<User> getUsersByPhoneNumber(@RequestParam String phoneNumber) {
+        return userService.getUsersByPhoneNumber(phoneNumber);
+    }
     
     @GetMapping("/paginate")
     public Page<User> getUsersWithPagination(@RequestParam(defaultValue = "0") int page,
