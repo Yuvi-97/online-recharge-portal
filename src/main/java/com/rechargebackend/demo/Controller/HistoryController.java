@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/History")
@@ -58,4 +60,11 @@ public class HistoryController {
         historyService.deleteHistory(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/findByDate")
+    public List<History> getHistoryByDate(@RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        return historyService.gethistorybydate(localDate);
+    }
+    
 }

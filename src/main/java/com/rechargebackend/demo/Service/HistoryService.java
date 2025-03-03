@@ -5,6 +5,7 @@ import com.rechargebackend.demo.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,5 +28,9 @@ public class HistoryService {
 
     public void deleteHistory(Long id) {
         historyRepository.deleteById(id);
+    }
+
+    public List<History> gethistorybydate(LocalDate date){
+        return historyRepository.findByDate(date);
     }
 }
