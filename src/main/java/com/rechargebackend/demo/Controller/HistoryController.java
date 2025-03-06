@@ -44,7 +44,6 @@ public class HistoryController {
         if (existingHistory.isPresent()) {
             History history = existingHistory.get();
             history.setUserId(updatedHistory.getUserId());
-            history.setId(updatedHistory.getId());
             history.setDate(updatedHistory.getDate());
             history.setTime(updatedHistory.getTime());
 
