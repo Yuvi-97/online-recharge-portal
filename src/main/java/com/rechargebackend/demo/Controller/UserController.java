@@ -2,8 +2,11 @@ package com.rechargebackend.demo.Controller;
 
 import com.rechargebackend.demo.Model.*;
 import com.rechargebackend.demo.Service.*;
+
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,7 +68,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    public  ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        return userService.deleteUser(id);
     }
 }

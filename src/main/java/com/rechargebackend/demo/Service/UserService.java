@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
@@ -62,8 +63,14 @@ public class UserService {
         return userRepository.totalUsers();
     }
 
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public ResponseEntity<String> deleteUser(Long id) {
+        if(userRepository.existsById(id)){
+            userRepository.deleteById(id);
+            return ResponseEntity.ok("User with ID "+ id + "has been deleted successfully");
+        }
+        else{
+            return ResponseEntity.status(404).body("User with ID "+id+"not found.");
+        }
     }
     public List<User> getUsersByPhoneNumber(String phoneNumber) {
         return userRepository.findByPhoneNumber(phoneNumber);
