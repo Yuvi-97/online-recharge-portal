@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -64,6 +67,11 @@ public class HistoryController {
     public List<History> getHistoryByDate(@RequestParam("date") String date) {
         LocalDate localDate = LocalDate.parse(date);
         return historyService.gethistorybydate(localDate);
+    }
+
+    @GetMapping("/getbyrange")
+    public List<History> getbyrange(@RequestParam("start") LocalDate start,@RequestParam("end") LocalDate end) {
+        return historyService.getHistorybyrange(start, end);
     }
     
 }

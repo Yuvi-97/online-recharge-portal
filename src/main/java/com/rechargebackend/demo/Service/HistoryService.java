@@ -33,4 +33,8 @@ public class HistoryService {
     public List<History> gethistorybydate(LocalDate date){
         return historyRepository.findByDate(date);
     }
+
+    public List<History> getHistorybyrange(LocalDate start,LocalDate end){
+        return historyRepository.getHistoryforDate(start, end);
+    }
 }
