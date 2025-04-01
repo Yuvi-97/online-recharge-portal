@@ -1,7 +1,8 @@
 package com.rechargebackend.demo.Model;
-
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,4 +16,8 @@ public class User {
     private String lastname;
     private String phoneNumber;
     private String address;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<History> histories;
 }

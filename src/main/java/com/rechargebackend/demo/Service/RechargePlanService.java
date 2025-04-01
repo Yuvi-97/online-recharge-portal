@@ -16,6 +16,9 @@ import java.util.Optional;
 public class RechargePlanService {
     @Autowired
     private RechargePlanRepository rechargePlanRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     public RechargePlan createRechargePlan(RechargePlan plan) {
         return rechargePlanRepository.save(plan);
@@ -39,19 +42,32 @@ public class RechargePlanService {
         }).orElse(null);
     }
 
-    public Page<RechargePlan> getAllRechargePlansPaginateSorting(int page,int size,String sortBy,String sortDir){
-        Sort sort = sortDir.equalsIgnoreCase("desc")? Sort.by(sortBy).descending() :Sort.by(sortBy).ascending();
-        Pageable pageable=PageRequest.of(page, size, sort);
+    public Page<RechargePlan> getAllRechargePlansPaginateSorting(int page, int size, String sortBy, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+        Pageable pageable = PageRequest.of(page, size, sort);
         return rechargePlanRepository.findAll(pageable);
     }
-    public Long getTotalPlans(){
+    
+    public Long getTotalPlans() {
         return rechargePlanRepository.findTotalPlans();
     }
+    
     public List<RechargePlan> getPlansByPriceRange(double minPrice, double maxPrice) {
         return rechargePlanRepository.findByPriceRange(minPrice, maxPrice);
     }
-    
+
     public void deleteRechargePlan(Long id) {
         rechargePlanRepository.deleteById(id);
+    }
+
+    //findbyprice
+
+    // New method to fetch recharge plans by User
+    public List<RechargePlan> getRechargePlansByUser(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            return rechargePlanRepository.findByUser(user.get());
+        }
+        throw new RuntimeException("User not found with ID: " + userId);
     }
 }

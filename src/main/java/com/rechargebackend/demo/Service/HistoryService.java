@@ -13,6 +13,9 @@ import java.util.Optional;
 public class HistoryService {
     @Autowired
     private HistoryRepository historyRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     public History createHistory(History history) {
         return historyRepository.save(history);
@@ -30,11 +33,20 @@ public class HistoryService {
         historyRepository.deleteById(id);
     }
 
-    public List<History> gethistorybydate(LocalDate date){
+    public List<History> getHistoryByDate(LocalDate date){
         return historyRepository.findByDate(date);
     }
 
-    public List<History> getHistorybyrange(LocalDate start,LocalDate end){
-        return historyRepository.getHistoryforDate(start, end);
+    public List<History> getHistoryByRange(LocalDate start, LocalDate end){
+        return historyRepository.getHistoryForDate(start, end);
+    }
+    
+    // New method to get user history using the relationship
+    public List<History> getHistoryByUser(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            return historyRepository.getHistoryForUser(user.get());
+        }
+        throw new RuntimeException("User not found with ID: " + userId);
     }
 }
